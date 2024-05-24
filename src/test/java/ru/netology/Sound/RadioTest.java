@@ -1,0 +1,158 @@
+package ru.netology.Sound;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+
+public class RadioTest {
+    @Test //граничные значения диапазона 0<=х<=9
+    public void setRadioStation() {
+        Radio radio = new Radio();
+        int expect = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //граничные значения диапазона 0<=х<=9
+    public void setMaxRadioStation() {
+        Radio radio = new Radio();
+        radio.setRadioStation(9);
+        int expect = 9;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //выполнение условия диапазона 0<=х<=9
+    public void setAfterMaxNumberRadio() {
+        Radio radio = new Radio();
+        radio.setRadioStation(10);
+        int expect = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //выполнение условия диапазона 0<=х<=9
+    public void setBeforeMinNumberRadio() {
+        Radio radio = new Radio();
+        radio.setRadioStation(-1);
+        int expect = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test // актуальная станция в диапазоне 0<=х<=9
+    public void setNewNumberRadio() {
+        Radio radio = new Radio();
+        radio.setRadioStation(7);
+        int expect = 7;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test // после 9 станции идёт 0
+    public void nextNumberRadioMax() {
+        Radio radio = new Radio();
+        radio.setRadioStation(9);
+        radio.next();
+        int expect = 0;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //переключение станции на следующую
+    public void nextNumberRadio() {
+        Radio radio = new Radio();
+        radio.setRadioStation(3);
+        radio.next();
+        int expect = 4;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test // перед 0 идёт 9
+    public void prevNumberRadioMin() {
+        Radio radio = new Radio();
+        radio.setRadioStation(0);
+        radio.prev();
+        int expect = 9;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //переключение станции на предыдущую
+    public void prevNumberRadio(){
+        Radio radio = new Radio();
+        radio.setRadioStation(8);
+        radio.prev();
+        int expect = 7;
+        int actual = radio.getCurrentRadioStation();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //максимальное значение звука
+    public void volumeMax(){
+        Radio radio = new Radio();
+        radio.setCurrentVolume(100);
+        radio.increaseVolume();
+        int expect = 100;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expect, actual);
+
+    }
+
+    @Test //граница максимального значение звука
+    public void volumeMaxUp(){
+        Radio radio = new Radio();
+        radio.setCurrentVolume(101);
+        int expect = 0;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expect, actual);
+
+    }
+
+    @Test
+    public void volumeUp(){
+        Radio radio = new Radio();
+        radio.setCurrentVolume(55);
+        radio.increaseVolume();
+        int expect = 56;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+    @Test //отрицательная граница 0
+    public void volumeMin(){
+        Radio radio = new Radio();
+        radio.setCurrentVolume(-1);
+        int expect = 0;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expect, actual);
+
+    }
+
+    @Test // с беззвучного до максимальной громкости
+    public void volumeUpIfMax(){
+        Radio radio = new Radio();
+        for (int i = 0; i <= 100; i++){
+            radio.volumeUp();
+        }
+        int expect = 100;
+        int actual = radio.getCurrentVolume();
+
+        Assertions.assertEquals(expect, actual);
+    }
+
+}
