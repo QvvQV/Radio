@@ -1,10 +1,11 @@
 package ru.netology.Sound;
 
 public class Radio {
-    public int currentRadioStation;
-    public int currentVolume;
+    private int currentRadioStation;
+    private int currentVolume;
 
     public int getCurrentRadioStation() {
+
         return currentRadioStation;
     }
 
@@ -15,16 +16,16 @@ public class Radio {
         currentRadioStation = newNumberCurrentRadio;
     }
 
-    public void next(){
-        if (currentRadioStation==9) {
+    public void next() {
+        if (currentRadioStation == 9) {
             currentRadioStation = 0;
         } else {
             currentRadioStation++;
         }
     }
 
-    public void prev(){
-        if (currentRadioStation==0) {
+    public void prev() {
+        if (currentRadioStation == 0) {
             currentRadioStation = 9;
         } else {
             currentRadioStation--;
@@ -32,19 +33,19 @@ public class Radio {
 
     }
 
-    public int getCurrentVolume(){
+    public int getCurrentVolume() {
         return currentVolume;
     }
 
     public void increaseVolume() { //увеличение звука
-        if (currentVolume<100){
+        if (currentVolume < 100) {
             currentVolume = currentVolume + 1;
         }
 
     }
 
-    public void setCurrentVolume (int newCurrentVolume) {
-        if( newCurrentVolume < 0 || newCurrentVolume > 100) {
+    public void setCurrentVolume(int newCurrentVolume) {
+        if (newCurrentVolume < 0 || newCurrentVolume > 100) {
             return;
         }
         currentVolume = newCurrentVolume;
@@ -53,7 +54,8 @@ public class Radio {
     public void volumeUp() { //для цикла
         if (currentVolume == 100) {
             return;
-        } currentVolume++;
+        }
+        currentVolume++;
     }
 
-    }
+}

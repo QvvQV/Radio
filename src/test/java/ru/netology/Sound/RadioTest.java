@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 
 
 public class RadioTest {
-    @Test //граничные значения диапазона 0<=х<=9
-    public void setRadioStation() {
+    @Test
+        //граничные значения диапазона 0<=х<=9
+    void setRadioStation() {
         Radio radio = new Radio();
         int expect = 0;
         int actual = radio.getCurrentRadioStation();
@@ -14,8 +15,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //граничные значения диапазона 0<=х<=9
-    public void setMaxRadioStation() {
+    @Test
+        //граничные значения диапазона 0<=х<=9
+    void setMaxRadioStation() {
         Radio radio = new Radio();
         radio.setRadioStation(9);
         int expect = 9;
@@ -24,8 +26,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //выполнение условия диапазона 0<=х<=9
-    public void setAfterMaxNumberRadio() {
+    @Test
+        //выполнение условия диапазона 0<=х<=9
+    void setAfterMaxNumberRadio() {
         Radio radio = new Radio();
         radio.setRadioStation(10);
         int expect = 0;
@@ -34,8 +37,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //выполнение условия диапазона 0<=х<=9
-    public void setBeforeMinNumberRadio() {
+    @Test
+        //выполнение условия диапазона 0<=х<=9
+    void setBeforeMinNumberRadio() {
         Radio radio = new Radio();
         radio.setRadioStation(-1);
         int expect = 0;
@@ -44,8 +48,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test // актуальная станция в диапазоне 0<=х<=9
-    public void setNewNumberRadio() {
+    @Test
+        // актуальная станция в диапазоне 0<=х<=9
+    void setNewNumberRadio() {
         Radio radio = new Radio();
         radio.setRadioStation(7);
         int expect = 7;
@@ -54,8 +59,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test // после 9 станции идёт 0
-    public void nextNumberRadioMax() {
+    @Test
+        // после 9 станции идёт 0
+    void nextNumberRadioMax() {
         Radio radio = new Radio();
         radio.setRadioStation(9);
         radio.next();
@@ -65,8 +71,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //переключение станции на следующую
-    public void nextNumberRadio() {
+    @Test
+        //переключение станции на следующую
+    void nextNumberRadio() {
         Radio radio = new Radio();
         radio.setRadioStation(3);
         radio.next();
@@ -76,8 +83,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test // перед 0 идёт 9
-    public void prevNumberRadioMin() {
+    @Test
+        // перед 0 идёт 9
+    void prevNumberRadioMin() {
         Radio radio = new Radio();
         radio.setRadioStation(0);
         radio.prev();
@@ -87,8 +95,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //переключение станции на предыдущую
-    public void prevNumberRadio(){
+    @Test
+        //переключение станции на предыдущую
+    void prevNumberRadio() {
         Radio radio = new Radio();
         radio.setRadioStation(8);
         radio.prev();
@@ -98,8 +107,9 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //максимальное значение звука
-    public void volumeMax(){
+    @Test
+        //максимальное значение звука
+    void volumeMax() {
         Radio radio = new Radio();
         radio.setCurrentVolume(100);
         radio.increaseVolume();
@@ -107,22 +117,21 @@ public class RadioTest {
         int actual = radio.getCurrentVolume();
 
         Assertions.assertEquals(expect, actual);
-
     }
 
-    @Test //граница максимального значение звука
-    public void volumeMaxUp(){
+    @Test
+        //граница максимального значение звука
+    void volumeMaxUp() {
         Radio radio = new Radio();
         radio.setCurrentVolume(101);
         int expect = 0;
         int actual = radio.getCurrentVolume();
 
         Assertions.assertEquals(expect, actual);
-
     }
 
     @Test
-    public void volumeUp(){
+    void volumeUp() {
         Radio radio = new Radio();
         radio.setCurrentVolume(55);
         radio.increaseVolume();
@@ -132,21 +141,22 @@ public class RadioTest {
         Assertions.assertEquals(expect, actual);
     }
 
-    @Test //отрицательная граница 0
-    public void volumeMin(){
+    @Test
+        //отрицательная граница 0
+    void volumeMin() {
         Radio radio = new Radio();
         radio.setCurrentVolume(-1);
         int expect = 0;
         int actual = radio.getCurrentVolume();
 
         Assertions.assertEquals(expect, actual);
-
     }
 
-    @Test // с беззвучного до максимальной громкости
-    public void volumeUpIfMax(){
+    @Test
+        // с беззвучного до максимальной громкости
+    void volumeUpIfMax() {
         Radio radio = new Radio();
-        for (int i = 0; i <= 100; i++){
+        for (int i = 0; i <= 100; i++) {
             radio.volumeUp();
         }
         int expect = 100;
@@ -154,5 +164,4 @@ public class RadioTest {
 
         Assertions.assertEquals(expect, actual);
     }
-
 }
