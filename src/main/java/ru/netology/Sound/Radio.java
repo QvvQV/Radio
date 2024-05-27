@@ -1,5 +1,13 @@
 package ru.netology.Sound;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
+
 public class Radio {
     private int currentRadioStation;
     private int maxQuantityRadioStation = 10;
@@ -47,14 +55,6 @@ public class Radio {
     public int getCurrentVolume() {
         return currentVolume;
     }
-
-//    public int getMaxVolume(){
-//        return maxVolume;
-//    }
-//
-//    public int getMinVolume(){
-//        return minVolume;
-//    }
 
     public void increaseVolume() { //увеличение звука
         if (currentVolume < maxVolume) {
