@@ -15,11 +15,6 @@ public class Radio {
     private int minVolume = 0;
     private int currentVolume = minVolume;
 
-    public Radio() {
-
-        return;
-    }
-
     public Radio(int maxQuantityRadioStation) {
         this.maxQuantityRadioStation = maxQuantityRadioStation;
     }
