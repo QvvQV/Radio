@@ -2,22 +2,33 @@ package ru.netology.Sound;
 
 public class Radio {
     private int currentRadioStation;
-    private int currentVolume;
+    private int maxQuantityRadioStation = 10;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int currentVolume = minVolume;
+
+    public Radio() {
+
+        return;
+    }
+
+    public Radio(int maxQuantityRadioStation) {
+        this.maxQuantityRadioStation = maxQuantityRadioStation;
+    }
 
     public int getCurrentRadioStation() {
-
         return currentRadioStation;
     }
 
     public void setRadioStation(int newNumberCurrentRadio) {
-        if (newNumberCurrentRadio < 0 || newNumberCurrentRadio > 9) {
+        if (newNumberCurrentRadio < 0 || newNumberCurrentRadio >= maxQuantityRadioStation) {
             return;
         }
         currentRadioStation = newNumberCurrentRadio;
     }
 
     public void next() {
-        if (currentRadioStation == 9) {
+        if (currentRadioStation == maxQuantityRadioStation - 1) {
             currentRadioStation = 0;
         } else {
             currentRadioStation++;
@@ -26,7 +37,7 @@ public class Radio {
 
     public void prev() {
         if (currentRadioStation == 0) {
-            currentRadioStation = 9;
+            currentRadioStation = maxQuantityRadioStation - 1;
         } else {
             currentRadioStation--;
         }
@@ -37,22 +48,30 @@ public class Radio {
         return currentVolume;
     }
 
+//    public int getMaxVolume(){
+//        return maxVolume;
+//    }
+//
+//    public int getMinVolume(){
+//        return minVolume;
+//    }
+
     public void increaseVolume() { //увеличение звука
-        if (currentVolume < 100) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
 
     }
 
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0 || newCurrentVolume > 100) {
+        if (newCurrentVolume < minVolume || newCurrentVolume > maxVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
     public void volumeUp() { //для цикла
-        if (currentVolume == 100) {
+        if (currentVolume == maxVolume) {
             return;
         }
         currentVolume++;
