@@ -48,14 +48,6 @@ public class Radio {
         return currentVolume;
     }
 
-//    public int getMaxVolume(){
-//        return maxVolume;
-//    }
-//
-//    public int getMinVolume(){
-//        return minVolume;
-//    }
-
     public void increaseVolume() { //увеличение звука
         if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
