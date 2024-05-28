@@ -56,7 +56,7 @@ public class Radio {
         }
     }
 
-    public void prev() {                // предъидущая радиостанция
+    public void prev() {                // предыдущая радиостанция
         if (currentRadioStation > minCurrentRadioStation) {
             currentRadioStation--;
         } else {
