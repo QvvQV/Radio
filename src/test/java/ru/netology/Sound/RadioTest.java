@@ -3,7 +3,6 @@ package ru.netology.Sound;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-
 class RadioTest {
     Radio radio = new Radio(50);
 
