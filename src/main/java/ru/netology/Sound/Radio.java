@@ -9,92 +9,59 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Radio {
-    private int maxStation = 9; // Максмимальная станция
-    private int minStation = 0; // Минимальная станция
-    private int currentStation; // Выбранная станция
-    private int numberStation; // Количество станций
-    private int maxVolume = 100; // Максимальная громкость
-    private int minVolume = 0; // Минимальная громкость
-    private int currentVolume; // Выбранная громкость
 
-    // Опции Радиостанций
-    public void setNumberStation(int numberStation) {
-        if (numberStation > maxStation) {
-            this.numberStation = 9;
-        }
-        if (numberStation < minStation) {
-            this.numberStation = 0;
-        }
-        if (numberStation <= maxStation & numberStation >= minStation) {
-            this.numberStation = numberStation - 1;
-        }
+
+    private int currentVolume;          // текущая громкость
+    private int maxCurrentVolume = 100;
+    private int minCurrentVolume = 0;
+    private int currentRadioStation;        // текущая радиостанция
+    private int maxCurrentRadioStation = 9;
+    private int minCurrentRadioStation = 0;
+
+
+    public Radio(int numberOfStations) {
+        maxCurrentRadioStation = minCurrentRadioStation + numberOfStations - 1;
     }
 
-    public void setCurrentStation(int currentStation) {
-        if (currentStation > numberStation) {
+
+    public void setCurrentRadioStation(int newCurrentRadioStation) {  // установка радиостанции
+        if (newCurrentRadioStation > maxCurrentRadioStation) {
             return;
         }
-        if (currentStation < minStation) {
+        if (newCurrentRadioStation < minCurrentRadioStation) {
             return;
         }
-        this.currentStation = currentStation;
+        currentRadioStation = newCurrentRadioStation;
     }
 
-    public void nextCurrentStation() {
-        int currentStation = this.currentStation;
-        if (currentStation >= numberStation) {
-            this.currentStation = minStation;
+
+    public void volumeUp() {                // увеличение громкости на 1
+        if (currentVolume < maxCurrentVolume) {
+            currentVolume++;
+        }
+    }
+
+    public void volumeDown() {              // уменьшение громкости на 1
+        if (currentVolume > minCurrentVolume) {
+            currentVolume--;
+        }
+    }
+
+
+    public void next() {                // следущая радиостанция
+        if (currentRadioStation < maxCurrentRadioStation) {
+            currentRadioStation++;
         } else {
-            this.currentStation = currentStation + 1;
+            currentRadioStation = minCurrentRadioStation;
         }
     }
 
-    public void prevCurrentStation() {
-        int currentStation = this.currentStation;
-        if (currentStation <= minStation) {
-            this.currentStation = numberStation;
+    public void prev() {                // предъидущая радиостанция
+        if (currentRadioStation > minCurrentRadioStation) {
+            currentRadioStation--;
         } else {
-            this.currentStation = currentStation - 1;
+            currentRadioStation = maxCurrentRadioStation;
         }
     }
 
-    public void remoteCurrentStation(int currentStation) {
-        if (currentStation > maxStation) {
-            this.currentStation = maxStation;
-        } else
-        if (currentStation < minStation) {
-            this.currentStation = minStation;
-        } else {
-            this.currentStation = currentStation;
-        }
-    }
-
-    // Опции Громкости
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > maxVolume) {
-            return;
-        }
-        if (currentVolume < minVolume) {
-            return;
-        }
-        this.currentVolume = currentVolume;
-    }
-
-    public void nextCurrentVolume() {
-        int currentVolume = this.currentVolume;
-        if (currentVolume >= maxVolume) {
-            this.currentVolume = maxVolume;
-        } else {
-            this.currentVolume = currentVolume + 1;
-        }
-    }
-
-    public void prevCurrentVolume() {
-        int currentVolume = this.currentVolume;
-        if (currentVolume <= minVolume) {
-            this.currentVolume = minVolume;
-        } else {
-            this.currentVolume = currentVolume - 1;
-        }
-    }
 }
