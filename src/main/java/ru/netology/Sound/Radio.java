@@ -9,67 +9,92 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Radio {
-    private int currentRadioStation;
-    private int maxQuantityRadioStation = 10;
-    private int maxVolume = 100;
-    private int minVolume = 0;
-    private int currentVolume = minVolume;
+    private int maxStation = 9; // Максмимальная станция
+    private int minStation = 0; // Минимальная станция
+    private int currentStation; // Выбранная станция
+    private int numberStation; // Количество станций
+    private int maxVolume = 100; // Максимальная громкость
+    private int minVolume = 0; // Минимальная громкость
+    private int currentVolume; // Выбранная громкость
 
-    public Radio(int maxQuantityRadioStation) {
-        this.maxQuantityRadioStation = maxQuantityRadioStation;
+    // Опции Радиостанций
+    public void setNumberStation(int numberStation) {
+        if (numberStation > maxStation) {
+            this.numberStation = 9;
+        }
+        if (numberStation < minStation) {
+            this.numberStation = 0;
+        }
+        if (numberStation <= maxStation & numberStation >= minStation) {
+            this.numberStation = numberStation - 1;
+        }
     }
 
-    public int getCurrentRadioStation() {
-        return currentRadioStation;
-    }
-
-    public void setRadioStation(int newNumberCurrentRadio) {
-        if (newNumberCurrentRadio < 0 || newNumberCurrentRadio >= maxQuantityRadioStation) {
+    public void setCurrentStation(int currentStation) {
+        if (currentStation > numberStation) {
             return;
         }
-        currentRadioStation = newNumberCurrentRadio;
+        if (currentStation < minStation) {
+            return;
+        }
+        this.currentStation = currentStation;
     }
 
-    public void next() {
-        if (currentRadioStation == maxQuantityRadioStation - 1) {
-            currentRadioStation = 0;
+    public void nextCurrentStation() {
+        int currentStation = this.currentStation;
+        if (currentStation >= numberStation) {
+            this.currentStation = minStation;
         } else {
-            currentRadioStation++;
+            this.currentStation = currentStation + 1;
         }
     }
 
-    public void prev() {
-        if (currentRadioStation == 0) {
-            currentRadioStation = maxQuantityRadioStation - 1;
+    public void prevCurrentStation() {
+        int currentStation = this.currentStation;
+        if (currentStation <= minStation) {
+            this.currentStation = numberStation;
         } else {
-            currentRadioStation--;
+            this.currentStation = currentStation - 1;
         }
-
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void increaseVolume() { //увеличение звука
-        if (currentVolume < maxVolume) {
-            currentVolume = currentVolume + 1;
+    public void remoteCurrentStation(int currentStation) {
+        if (currentStation > maxStation) {
+            this.currentStation = maxStation;
+        } else
+        if (currentStation < minStation) {
+            this.currentStation = minStation;
+        } else {
+            this.currentStation = currentStation;
         }
-
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < minVolume || newCurrentVolume > maxVolume) {
+    // Опции Громкости
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
             return;
         }
-        currentVolume = newCurrentVolume;
-    }
-
-    public void volumeUp() { //для цикла
-        if (currentVolume == maxVolume) {
+        if (currentVolume < minVolume) {
             return;
         }
-        currentVolume++;
+        this.currentVolume = currentVolume;
     }
 
+    public void nextCurrentVolume() {
+        int currentVolume = this.currentVolume;
+        if (currentVolume >= maxVolume) {
+            this.currentVolume = maxVolume;
+        } else {
+            this.currentVolume = currentVolume + 1;
+        }
+    }
+
+    public void prevCurrentVolume() {
+        int currentVolume = this.currentVolume;
+        if (currentVolume <= minVolume) {
+            this.currentVolume = minVolume;
+        } else {
+            this.currentVolume = currentVolume - 1;
+        }
+    }
 }
