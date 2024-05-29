@@ -1,61 +1,67 @@
 package ru.netology.Sound;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@Data
+@NoArgsConstructor
+
 public class Radio {
-    private int currentRadioStation;
-    private int currentVolume;
 
-    public int getCurrentRadioStation() {
 
-        return currentRadioStation;
+    private int currentVolume;          // текущая громкость
+    private int maxCurrentVolume = 100;
+    private int minCurrentVolume = 0;
+    private int currentRadioStation;        // текущая радиостанция
+    private int maxCurrentRadioStation = 9;
+    private int minCurrentRadioStation = 0;
+
+
+    public Radio(int numberOfStations) {
+        maxCurrentRadioStation = minCurrentRadioStation + numberOfStations - 1;
     }
 
-    public void setRadioStation(int newNumberCurrentRadio) {
-        if (newNumberCurrentRadio < 0 || newNumberCurrentRadio > 9) {
+
+    public void setCurrentRadioStation(int newCurrentRadioStation) {  // установка радиостанции
+        if (newCurrentRadioStation > maxCurrentRadioStation) {
             return;
         }
-        currentRadioStation = newNumberCurrentRadio;
+        if (newCurrentRadioStation < minCurrentRadioStation) {
+            return;
+        }
+        currentRadioStation = newCurrentRadioStation;
     }
 
-    public void next() {
-        if (currentRadioStation == 9) {
-            currentRadioStation = 0;
-        } else {
+
+    public void volumeUp() {                // увеличение громкости на 1
+        if (currentVolume < maxCurrentVolume) {
+            currentVolume++;
+        }
+    }
+
+    public void volumeDown() {              // уменьшение громкости на 1
+        if (currentVolume > minCurrentVolume) {
+            currentVolume--;
+        }
+    }
+
+
+    public void next() {                // следущая радиостанция
+        if (currentRadioStation < maxCurrentRadioStation) {
             currentRadioStation++;
-        }
-    }
-
-    public void prev() {
-        if (currentRadioStation == 0) {
-            currentRadioStation = 9;
         } else {
+            currentRadioStation = minCurrentRadioStation;
+        }
+    }
+
+    public void prev() {                // предъидущая радиостанция
+        if (currentRadioStation > minCurrentRadioStation) {
             currentRadioStation--;
+        } else {
+            currentRadioStation = maxCurrentRadioStation;
         }
-
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public void increaseVolume() { //увеличение звука
-        if (currentVolume < 100) {
-            currentVolume = currentVolume + 1;
-        }
-
-    }
-
-    public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0 || newCurrentVolume > 100) {
-            return;
-        }
-        currentVolume = newCurrentVolume;
-    }
-
-    public void volumeUp() { //для цикла
-        if (currentVolume == 100) {
-            return;
-        }
-        currentVolume++;
     }
 
 }
